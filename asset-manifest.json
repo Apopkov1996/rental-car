@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Apopkov1996/rental-car/static/css/main.7acaea2f.css",
+    "main.js": "/Apopkov1996/rental-car/static/js/main.07d3183d.js",
+    "index.html": "/Apopkov1996/rental-car/index.html",
+    "main.7acaea2f.css.map": "/Apopkov1996/rental-car/static/css/main.7acaea2f.css.map",
+    "main.07d3183d.js.map": "/Apopkov1996/rental-car/static/js/main.07d3183d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7acaea2f.css",
+    "static/js/main.07d3183d.js"
+  ]
+}
