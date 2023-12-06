@@ -9,19 +9,10 @@ export const App = () => {
     <div>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />}></Route>
-          <Route
-            path="/catalog
-          "
-            element={<Catalog />}
-          ></Route>
-          <Route
-            path="/favorites
-          "
-            element={<Favorites />}
-          ></Route>
+          <Route index element={<Home />} />
+          <Route path="/catalog" element={<Catalog />} />
+          <Route path="/favorites" element={<Favorites />} />
         </Route>
-
         <Route path="*" element={<Home />} />
       </Routes>
     </div>
