@@ -1,12 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { DivHeader, HeaderLink } from './Navbar.styled';
 
 export const Navbar = () => {
   return (
-    <div>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/catalog">Catalog</NavLink>
-      <NavLink to="/favorites">Favorites</NavLink>
-    </div>
+    <DivHeader>
+      <HeaderLink to="/">Home</HeaderLink>
+      <HeaderLink to="/catalog">Catalog</HeaderLink>
+      <HeaderLink to="/favorites">Favorites</HeaderLink>
+    </DivHeader>
   );
 };
