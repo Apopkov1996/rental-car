@@ -37,6 +37,7 @@ export const FormFilter = styled.form`
   display: flex;
   gap: 18px;
   align-items: flex-end;
+  justify-content: center;
 `;
 
 export const FormLabel = styled.label`
@@ -75,4 +76,18 @@ export const Icon = styled.svg`
   transform: translateY(-50%)
     rotate(${props => (props.isOpen ? '180deg' : '0deg')});
   transition: transform 0.3s ease;
+`;
+
+export const SelectContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+export const Label = styled.label`
+  font-size: 14px;
+  color: rgba(138, 138, 137, 1);
+  font-family: 'Manrope';
+  padding-left: 5px;
+  margin-bottom: 8px;
 `;

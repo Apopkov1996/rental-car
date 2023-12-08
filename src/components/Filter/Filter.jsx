@@ -1,19 +1,34 @@
 import React, { useState } from 'react';
-import {
-  Btn,
-  DivF,
-  FormFilter,
-  FormLabel,
-  FormSelect,
-  FormSelectContainer,
-  Icon,
-  Text,
-} from './Filter.styled';
-import svg from '../../img/Sprite.svg';
+import { Btn, DivF, FormFilter, SelectContainer, Text } from './Filter.styled';
+// import svg from '../../img/Sprite.svg';
+import Select from 'react-select';
 
-export const FilterForm = ({ onFilter }) => {
+const options = [
+  { value: '', label: 'All Brands' },
+  { value: 'Buick', label: 'Buick' },
+  { value: 'Volvo', label: 'Volvo' },
+  { value: 'HUMMER', label: 'HUMMER' },
+  { value: 'Subaru', label: 'Subaru' },
+  { value: 'Mitsubishi', label: 'Mitsubishi' },
+  { value: 'Nissan', label: 'Nissan' },
+  { value: 'Lincoln', label: 'Lincoln' },
+  { value: 'GMC', label: 'GMC' },
+  { value: 'Hyundai', label: 'Hyundai' },
+  { value: 'MINI', label: 'MINI' },
+  { value: 'Bentley', label: 'Bentley' },
+  { value: 'Mercedes-Benz', label: 'Mercedes-Benz' },
+  { value: 'Aston Martin', label: 'Aston Martin' },
+  { value: 'Pontiac', label: 'Pontiac' },
+  { value: 'Lamborghini', label: 'Lamborghini' },
+  { value: 'Audi', label: 'Audi' },
+  { value: 'BMW', label: 'BMW' },
+  { value: 'Chevrolet', label: 'Chevrolet' },
+  { value: 'Chrysler', label: 'Chrysler' },
+  { value: 'Kia', label: 'Kia' },
+  { value: 'Land', label: 'Land' },
+];
+export const FilterForm = ({ makes, onFilter }) => {
   const [selectedBrand, setSelectedBrand] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -25,45 +40,45 @@ export const FilterForm = ({ onFilter }) => {
   return (
     <DivF>
       <FormFilter onSubmit={handleSubmit}>
-        <FormLabel>
+        <SelectContainer>
           <Text>Car brand</Text>
+          <Select
+            placeholder="Enter the text"
+            value={options.find(option => option.value === selectedBrand)}
+            onChange={selectedOption => setSelectedBrand(selectedOption.value)}
+            options={options}
+            styles={{
+              control: styles => ({
+                ...styles,
+                width: '224px',
+                height: '48px',
+                borderColor: 'rgba(18, 20, 23, 0.2)',
+                border: 'none',
+                borderRadius: '14px',
+                padding: '8px',
+                fontSize: '16px',
+                fontFamily: 'Manrope',
+                backgroundColor: 'rgba(247, 247, 251, 1)',
+                appearance: 'none',
+              }),
+              option: (styles, { isFocused }) => {
+                return {
+                  ...styles,
+                  color: isFocused ? 'black' : 'rgba(18, 20, 23, 0.2)',
+                  fontFamily: 'Manrope',
+                };
+              },
 
-          <FormSelectContainer>
-            <FormSelect
-              value={selectedBrand}
-              onChange={e => setSelectedBrand(e.target.value)}
-              isOpen={isOpen}
-              onBlur={() => setIsOpen(false)}
-            >
-              <option value="">All Brands</option>
-              <option value="Buick">Buick</option>
-              <option value="Volvo">Volvo</option>
-              <option value="HUMMER">HUMMER</option>
-              <option value="Subaru">Subaru</option>
-              <option value="Mitsubishi">Mitsubishi</option>
-              <option value="Nissan">Nissan</option>
-              <option value="Lincoln">Lincoln</option>
-              <option value="GMC">GMC</option>
-              <option value="Hyundai">Hyundai</option>
-              <option value="MINI">MINI</option>
-              <option value="Bentley">Bentley</option>
-              <option value="Mercedes-Benz">Mercedes-Benz</option>
-              <option value="Aston Martin">Aston Martin</option>
-              <option value="Pontiac">Pontiac</option>
-              <option value="Lamborghini">Lamborghini</option>
-              <option value="Audi">Audi</option>
-              <option value="BMW">BMW</option>
-              <option value="Chevrolet">Chevrolet</option>
-              <option value="Mercedes-Benz">Mercedes-Benz</option>
-              <option value="Chrysler">Chrysler</option>
-              <option value="Kia">Kia</option>
-              <option value="Land">Land</option>
-            </FormSelect>
-            <Icon width={16} height={16}>
-              <use href={svg + '#icon-chevron-down'}></use>
-            </Icon>
-          </FormSelectContainer>
-        </FormLabel>
+              placeholder: styles => ({
+                ...styles,
+                color: 'rgba(18, 20, 23, 1)',
+              }),
+            }}
+            components={{
+              IndicatorSeparator: () => null,
+            }}
+          />
+        </SelectContainer>
 
         <Btn type="submit">Search</Btn>
       </FormFilter>

@@ -14,4 +14,5 @@ export const CarList = styled.ul`
   column-gap: 29px;
   row-gap: 50px;
   flex-wrap: wrap;
+  justify-content: center;
 `;
