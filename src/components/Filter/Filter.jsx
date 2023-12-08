@@ -1,80 +1,72 @@
 import React, { useState } from 'react';
+import {
+  Btn,
+  DivF,
+  FormFilter,
+  FormLabel,
+  FormSelect,
+  FormSelectContainer,
+  Icon,
+  Text,
+} from './Filter.styled';
+import svg from '../../img/Sprite.svg';
 
 export const FilterForm = ({ onFilter }) => {
-  const [brand, setBrand] = useState('');
-  const [rentalPrice, setRentalPrice] = useState(10);
-  const [mileageFrom, setMileageFrom] = useState('');
-  const [mileageTo, setMileageTo] = useState('');
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSubmit = e => {
     e.preventDefault();
 
-    onFilter({ brand, rentalPrice, mileageFrom, mileageTo });
+    onFilter({
+      brand: selectedBrand,
+    });
   };
-
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Car brand
-        <select value={brand} onChange={e => setBrand(e.target.value)}>
-          <option value="">All Brands</option>
-          <option value="Brand2">Buick</option>
-          <option value="Brand3">Volvo</option>
-          <option value="Brand4">HUMMER</option>
-          <option value="Brand5">Subaru</option>
-          <option value="Brand6">Mitsubishi</option>
-          <option value="Brand7">Nissan</option>
-          <option value="Brand8">Lincoln</option>
-          <option value="Brand9">GMC</option>
-          <option value="Brand10">Hyundai</option>
-          <option value="Brand11">MINI</option>
-          <option value="Brand12">Bentley</option>
-          <option value="Brand13">Mercedes-Benz</option>
-          <option value="Brand14">Aston Martin</option>
-          <option value="Brand15">Pontiac</option>
-          <option value="Brand16">Lamborghini</option>
-          <option value="Brand17">Audi</option>
-          <option value="Brand18">BMW</option>
-          <option value="Brand19">Chevrolet</option>
-          <option value="Brand20">Mercedes-Benz</option>
-          <option value="Brand21">Chrysler</option>
-          <option value="Brand22">Kia</option>
-          <option value="Brand23">Land</option>
-        </select>
-      </label>
+    <DivF>
+      <FormFilter onSubmit={handleSubmit}>
+        <FormLabel>
+          <Text>Car brand</Text>
 
-      <label>
-        Price/ 1 hour
-        <select
-          value={rentalPrice}
-          onChange={e => setRentalPrice(Number(e.target.value))}
-        >
-          {/* Выпадающий список с ценами за день */}
-          {[...Array(15).keys()].map(step => (
-            <option key={step} value={10 + step * 10}>
-              ${10 + step * 10}
-            </option>
-          ))}
-        </select>
-      </label>
+          <FormSelectContainer>
+            <FormSelect
+              value={selectedBrand}
+              onChange={e => setSelectedBrand(e.target.value)}
+              isOpen={isOpen}
+              onBlur={() => setIsOpen(false)}
+            >
+              <option value="">All Brands</option>
+              <option value="Buick">Buick</option>
+              <option value="Volvo">Volvo</option>
+              <option value="HUMMER">HUMMER</option>
+              <option value="Subaru">Subaru</option>
+              <option value="Mitsubishi">Mitsubishi</option>
+              <option value="Nissan">Nissan</option>
+              <option value="Lincoln">Lincoln</option>
+              <option value="GMC">GMC</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="MINI">MINI</option>
+              <option value="Bentley">Bentley</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="Aston Martin">Aston Martin</option>
+              <option value="Pontiac">Pontiac</option>
+              <option value="Lamborghini">Lamborghini</option>
+              <option value="Audi">Audi</option>
+              <option value="BMW">BMW</option>
+              <option value="Chevrolet">Chevrolet</option>
+              <option value="Mercedes-Benz">Mercedes-Benz</option>
+              <option value="Chrysler">Chrysler</option>
+              <option value="Kia">Kia</option>
+              <option value="Land">Land</option>
+            </FormSelect>
+            <Icon width={16} height={16}>
+              <use href={svg + '#icon-chevron-down'}></use>
+            </Icon>
+          </FormSelectContainer>
+        </FormLabel>
 
-      <label>
-        Сar mileage / km
-        <input
-          type="number"
-          placeholder="From"
-          value={mileageFrom}
-          onChange={e => setMileageFrom(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="To"
-          value={mileageTo}
-          onChange={e => setMileageTo(e.target.value)}
-        />
-      </label>
-
-      <button type="submit">Search</button>
-    </form>
+        <Btn type="submit">Search</Btn>
+      </FormFilter>
+    </DivF>
   );
 };
