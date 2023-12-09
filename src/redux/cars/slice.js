@@ -11,7 +11,12 @@ const initialState = {
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
-  reducers: {},
+  reducers: {
+    loadMoreCarsSuccess: (state, action) => {
+      state.carsList = [...state.carsList, ...action.payload];
+      state.currentPage += 1;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getCarsListThunk.pending, state => {
@@ -40,3 +45,4 @@ const carsSlice = createSlice({
 });
 
 export const carsReducer = carsSlice.reducer;
+export const { loadMoreCarsSuccess } = carsSlice.actions;

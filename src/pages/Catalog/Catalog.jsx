@@ -8,8 +8,9 @@ import {
   selectLoader,
 } from '../../redux/cars/selectors';
 import { CarItem } from 'components/CarDetails/CarDetails';
-import { CarList, Div } from './Catalog.styled';
+import { Btn, CarList, Div, DivBtn } from './Catalog.styled';
 import { FilterForm } from 'components/Filter/Filter';
+import { loadMoreCarsSuccess } from '../../redux/cars/slice';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,17 @@ const Catalog = () => {
     dispatch(getCarsListThunk(currentPage));
   }, [dispatch, currentPage]);
 
+  console.log(filteredCars);
+  // console.log(CarList);
+
+  const handleLoadMore = () => {
+    dispatch(getCarsListThunk(currentPage + 1))
+      .then(newCars => {
+        dispatch(loadMoreCarsSuccess(newCars));
+      })
+      .catch(error => {});
+  };
+
   if (loader) {
     return <div>Loading...</div>;
   }
@@ -49,6 +61,9 @@ const Catalog = () => {
           <CarItem key={car.id} car={car} />
         ))}
       </CarList>
+      <DivBtn>
+        <Btn onClick={handleLoadMore}>Load more</Btn>
+      </DivBtn>
     </Div>
   );
 };

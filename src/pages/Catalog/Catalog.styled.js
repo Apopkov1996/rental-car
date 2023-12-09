@@ -16,3 +16,24 @@ export const CarList = styled.ul`
   flex-wrap: wrap;
   justify-content: center;
 `;
+
+export const DivBtn = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 100px;
+  margin-bottom: 150px;
+`;
+
+export const Btn = styled.button`
+  display: block;
+  margin: 0 auto;
+  padding: 10px 10px;
+
+  color: #3470ff;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  text-decoration-line: underline;
+`;
