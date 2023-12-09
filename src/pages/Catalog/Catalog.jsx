@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCarsListThunk } from '../../redux/cars/operations';
 import {
   selectCarsList,
-  selectCurrentPage,
   selectError,
   selectLoader,
 } from '../../redux/cars/selectors';

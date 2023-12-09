@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Item = styled.li`
+  position: relative;
   display: flex;
   width: 274px;
   height: 426px;
@@ -79,5 +80,24 @@ export const Btn = styled.button`
 
   &:hover {
     background-color: #0b44cd;
+  }
+`;
+
+export const BtnSvg = styled.button`
+  position: absolute;
+  top: 14px;
+  right: 14px;
+`;
+
+export const SvgF = styled.svg`
+  fill: none;
+  stroke: white;
+  stroke-opacity: 0.8;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  &.active {
+    fill: #3470ff; /* ваш цвет для активного состояния */
   }
 `;
