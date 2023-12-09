@@ -10,16 +10,16 @@ import {
 import { CarItem } from 'components/CarDetails/CarDetails';
 import { Btn, CarList, Div, DivBtn } from './Catalog.styled';
 import { FilterForm } from 'components/Filter/Filter';
-import { loadMoreCarsSuccess } from '../../redux/cars/slice';
 
 const Catalog = () => {
   const dispatch = useDispatch();
   const сarsList = useSelector(selectCarsList);
   const loader = useSelector(selectLoader);
   const error = useSelector(selectError);
-  const currentPage = useSelector(selectCurrentPage);
 
   const [selectedBrand, setSelectedBrand] = useState('');
+
+  const [page, setPage] = useState(1);
 
   const filteredCars = useMemo(() => {
     return сarsList.filter(car => {
@@ -28,18 +28,11 @@ const Catalog = () => {
   }, [сarsList, selectedBrand]);
 
   useEffect(() => {
-    dispatch(getCarsListThunk(currentPage));
-  }, [dispatch, currentPage]);
-
-  console.log(filteredCars);
-  // console.log(CarList);
+    dispatch(getCarsListThunk(page));
+  }, [dispatch, page]);
 
   const handleLoadMore = () => {
-    dispatch(getCarsListThunk(currentPage + 1))
-      .then(newCars => {
-        dispatch(loadMoreCarsSuccess(newCars));
-      })
-      .catch(error => {});
+    setPage(prevPage => prevPage + 1);
   };
 
   if (loader) {
@@ -62,7 +55,11 @@ const Catalog = () => {
         ))}
       </CarList>
       <DivBtn>
-        <Btn onClick={handleLoadMore}>Load more</Btn>
+        {page < 3 && (
+          <Btn type="button" onClick={handleLoadMore}>
+            Load more
+          </Btn>
+        )}
       </DivBtn>
     </Div>
   );

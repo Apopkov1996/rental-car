@@ -10,14 +10,12 @@ import { Provider } from 'react-redux';
 import { GlobalStyle } from 'styles/GlobalStyles';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter basename="/rental-car">
-        <PersistGate loading={null} persistor={persistor}>
-          <GlobalStyle />
-          <App />
-        </PersistGate>
-      </BrowserRouter>
-    </Provider>
-  </React.StrictMode>
+  <Provider store={store}>
+    <BrowserRouter basename="/rental-car">
+      <PersistGate loading={null} persistor={persistor}>
+        <GlobalStyle />
+        <App />
+      </PersistGate>
+    </BrowserRouter>
+  </Provider>
 );

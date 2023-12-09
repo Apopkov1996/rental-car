@@ -6,15 +6,15 @@ const initialState = {
   error: null,
   loader: false,
   currentPage: 1,
+  totalItems: 0,
 };
 
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
   reducers: {
-    loadMoreCarsSuccess: (state, action) => {
-      state.carsList = [...state.carsList, ...action.payload];
-      state.currentPage += 1;
+    setTotalItems: (state, action) => {
+      state.totalItems = action.payload;
     },
   },
   extraReducers: builder => {
@@ -23,8 +23,7 @@ const carsSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getCarsListThunk.fulfilled, (state, action) => {
-        state.status = 'succeeded';
-        state.carsList = action.payload;
+        state.carsList = [...state.carsList, ...action.payload];
       })
       .addCase(getCarsListThunk.rejected, (state, action) => {
         state.status = 'failed';
@@ -44,5 +43,5 @@ const carsSlice = createSlice({
   },
 });
 
+export const { setTotalItems } = carsSlice.actions;
 export const carsReducer = carsSlice.reducer;
-export const { loadMoreCarsSuccess } = carsSlice.actions;
