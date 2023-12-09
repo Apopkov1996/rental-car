@@ -98,6 +98,6 @@ export const SvgF = styled.svg`
   stroke-linejoin: round;
 
   &.active {
-    fill: #3470ff; /* ваш цвет для активного состояния */
+    fill: #3470ff;
   }
 `;
