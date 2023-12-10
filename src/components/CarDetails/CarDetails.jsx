@@ -13,7 +13,10 @@ import {
 import BasicModal from 'components/Modal/Modal';
 import svg from '../../img/Sprite.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectFavorites } from '../../redux/favourites/selectors';
+import {
+  selectActive,
+  selectFavorites,
+} from '../../redux/favourites/selectors';
 import {
   addFavorite,
   removeFavorite,
@@ -25,16 +28,13 @@ export const CarItem = ({ car }) => {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-
-  const [isActive, setIsActive] = useState(false);
+  const isActive = useSelector(selectActive);
 
   const handleToggleFavorite = () => {
     if (favorites.some(item => item.id === car.id)) {
       dispatch(removeFavorite(car));
-      setIsActive(true);
     } else {
       dispatch(addFavorite(car));
-      setIsActive(false);
     }
   };
   console.log(favorites);

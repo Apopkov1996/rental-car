@@ -11,14 +11,14 @@ export const favoritesSlice = createSlice({
   reducers: {
     addFavorite: (state, action) => {
       state.favorites.push(action.payload);
-      state.isActive = true;
+      state.isActive = false;
     },
     removeFavorite: (state, action) => {
       const updatedFavorites = state.favorites.filter(
         item => item.id !== action.payload.id
       );
       state.favorites = updatedFavorites;
-      state.isActive = false;
+      state.isActive = true;
     },
   },
 });
