@@ -1,4 +1,4 @@
-import { Layout } from 'Layout/Layout';
+import { Layout } from 'components/Layout/Layout';
 import Catalog from 'pages/Catalog/Catalog';
 import Favorites from 'pages/Favorites/Favorites';
 import Home from 'pages/Home/Home';

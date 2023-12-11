@@ -13,14 +13,12 @@ import {
 import BasicModal from 'components/Modal/Modal';
 import svg from '../../img/Sprite.svg';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectActive,
-  selectFavorites,
-} from '../../redux/favourites/selectors';
+import { selectFavorites } from '../../redux/favourites/selectors';
 import {
   addFavorite,
   removeFavorite,
 } from '../../redux/favourites/favouriteSlice';
+import { toast } from 'react-toastify';
 
 export const CarItem = ({ car }) => {
   const [open, setOpen] = useState(false);
@@ -28,16 +26,21 @@ export const CarItem = ({ car }) => {
   const handleClose = () => setOpen(false);
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
-  const isActive = useSelector(selectActive);
+  const [isActive, setIsActive] = useState(false);
 
   const handleToggleFavorite = () => {
     if (favorites.some(item => item.id === car.id)) {
       dispatch(removeFavorite(car));
+      setIsActive(false);
+      toast.info(`Car ${car.make} delete from favorite`);
     } else {
       dispatch(addFavorite(car));
+      setIsActive(true);
+      toast.success(`Car ${car.make} add to favorite`);
     }
+
+    localStorage.setItem('isActive', JSON.stringify(!isActive));
   };
-  console.log(favorites);
 
   const city = car.address.split(',')[1]?.trim() || 'Unknown City';
   const country = car.address.split(',')[2]?.trim() || 'Unknown City';

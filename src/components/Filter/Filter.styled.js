@@ -31,6 +31,10 @@ export const Btn = styled.button`
   font-style: normal;
   font-weight: 600;
   line-height: 20px; /* 142.857% */
+
+  &:hover {
+    background-color: #0b44cd;
+  }
 `;
 
 export const FormFilter = styled.form`
