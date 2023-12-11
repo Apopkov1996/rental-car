@@ -20,24 +20,23 @@ const carsSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getCarsListThunk.pending, state => {
-        state.status = 'loading';
+        state.loader = true;
       })
       .addCase(getCarsListThunk.fulfilled, (state, action) => {
         state.carsList = [...state.carsList, ...action.payload];
+        state.loader = false;
       })
       .addCase(getCarsListThunk.rejected, (state, action) => {
-        state.status = 'failed';
         state.error = action.payload;
       })
       .addCase(getCarByIdThunk.pending, state => {
-        state.status = 'loading';
+        state.loader = true;
       })
       .addCase(getCarByIdThunk.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.loader = false;
         state.selectedCar = action.payload;
       })
       .addCase(getCarByIdThunk.rejected, (state, action) => {
-        state.status = 'failed';
         state.error = action.payload;
       });
   },

@@ -9,6 +9,8 @@ import {
 import { CarItem } from 'components/CarDetails/CarDetails';
 import { Btn, CarList, Div, DivBtn } from './Catalog.styled';
 import { FilterForm } from 'components/Filter/Filter';
+import { toast } from 'react-toastify';
+import { Loading } from 'components/Loading/Loading';
 
 const Catalog = () => {
   const dispatch = useDispatch();
@@ -20,6 +22,8 @@ const Catalog = () => {
 
   const [page, setPage] = useState(1);
 
+  console.log(page);
+
   const filteredCars = useMemo(() => {
     return сarsList.filter(car => {
       return !selectedBrand || car.make === selectedBrand;
@@ -27,20 +31,13 @@ const Catalog = () => {
   }, [сarsList, selectedBrand]);
 
   useEffect(() => {
-    dispatch(getCarsListThunk(page));
+    dispatch(getCarsListThunk({ page: page, limit: 12 }));
   }, [dispatch, page]);
 
   const handleLoadMore = () => {
     setPage(prevPage => prevPage + 1);
   };
 
-  if (loader) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
   return (
     <Div>
       <FilterForm
@@ -49,6 +46,8 @@ const Catalog = () => {
         }}
       />
       <CarList>
+        {error && toast.error(error)}
+        {loader && <Loading />}
         {filteredCars.map(car => (
           <CarItem key={car.id} car={car} />
         ))}

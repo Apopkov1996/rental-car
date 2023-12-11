@@ -38,8 +38,6 @@ export const CarItem = ({ car }) => {
       setIsActive(true);
       toast.success(`Car ${car.make} add to favorite`);
     }
-
-    localStorage.setItem('isActive', JSON.stringify(!isActive));
   };
 
   const city = car.address.split(',')[1]?.trim() || 'Unknown City';
