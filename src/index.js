@@ -16,8 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <BrowserRouter basename="/rental-car">
       <PersistGate loading={null} persistor={persistor}>
         <GlobalStyle />
-        <ToastContainer autoClose={2000} position="top-right" />
+
         <App />
+        <ToastContainer autoClose={2000} position="top-right" />
       </PersistGate>
     </BrowserRouter>
   </Provider>

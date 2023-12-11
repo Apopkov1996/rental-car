@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCarsListThunk } from '../../redux/cars/operations';
 import {
@@ -19,24 +19,15 @@ const Catalog = () => {
   const error = useSelector(selectError);
 
   const [selectedBrand, setSelectedBrand] = useState('');
-
   const [page, setPage] = useState(1);
-
-  console.log(page);
-
-  const filteredCars = useMemo(() => {
-    return сarsList.filter(car => {
-      return !selectedBrand || car.make === selectedBrand;
-    });
-  }, [сarsList, selectedBrand]);
 
   useEffect(() => {
     dispatch(getCarsListThunk({ page: page, limit: 12 }));
   }, [dispatch, page]);
 
-  const handleLoadMore = () => {
-    setPage(prevPage => prevPage + 1);
-  };
+  const filteredCars = сarsList.filter(car => {
+    return !selectedBrand || car.make === selectedBrand;
+  });
 
   return (
     <Div>
@@ -52,9 +43,10 @@ const Catalog = () => {
           <CarItem key={car.id} car={car} />
         ))}
       </CarList>
+
       <DivBtn>
         {page < 3 && (
-          <Btn type="button" onClick={handleLoadMore}>
+          <Btn type="button" onClick={() => setPage(page + 1)}>
             Load more
           </Btn>
         )}
